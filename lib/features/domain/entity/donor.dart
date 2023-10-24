@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:ngo/features/domain/entity/product.dart';
 
 class DonorEntity extends Equatable {
   final String? donor_name;
@@ -8,7 +9,8 @@ class DonorEntity extends Equatable {
   final String? donor_id_type;
   final String? donor_id_number;
   final String? donor_pan_number;
-  final bool donor_anonymous;
+  final bool? donor_anonymous;
+  final ProductEntity? product;
 
   const DonorEntity(
       {this.donor_name,
@@ -18,7 +20,8 @@ class DonorEntity extends Equatable {
       this.donor_id_type,
       this.donor_id_number,
       this.donor_pan_number,
-      required this.donor_anonymous});
+      this.donor_anonymous,
+      this.product});
 
   @override
   List<Object?> get props {
@@ -31,6 +34,7 @@ class DonorEntity extends Equatable {
       donor_id_number,
       donor_pan_number,
       donor_anonymous,
+      product,
     ];
   }
 }

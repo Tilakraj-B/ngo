@@ -30,7 +30,7 @@ class RegisterDonorBloc extends Bloc<RegisterDonorEvent, RegisterDonorState> {
         state.donorModel = state.donorModel.copyWith(donor_pan_number: value);
       case 8:
         state.donorModel = state.donorModel
-            .copyWith(donor_anonymous: !state.donorModel.donor_anonymous!);
+            .copyWith(donor_anonymous: value == "false" ? false : true);
     }
     print("Hello chekcing  : ${state.donorModel}");
   }

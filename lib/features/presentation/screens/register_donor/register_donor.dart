@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ngo/features/presentation/bloc/register_donor/register_donor_bloc.dart';
 import 'package:ngo/features/presentation/bloc/register_donor/register_donor_event.dart';
 import 'package:ngo/features/presentation/bloc/register_donor/register_donor_state.dart';
-import 'package:ngo/features/presentation/widgets/LargeButton.dart';
+import 'package:ngo/features/presentation/widgets/checkbox_with_text.dart';
+import 'package:ngo/features/presentation/widgets/large_button.dart';
 
 import '../../widgets/text_field.dart';
 
@@ -67,6 +68,12 @@ class RegisterDonor extends StatelessWidget {
               onChanged: (value) => BlocProvider.of<RegisterDonorBloc>(context)
                   .add(TextChangeEvent(value, 2)),
             ),
+            CheckBoxWithText(
+                title: "Keep Identity Anonymous",
+                isChecked: isChecked,
+                onChanged: (value) =>
+                    BlocProvider.of<RegisterDonorBloc>(context)
+                        .add(TextChangeEvent(value.toString(), 8))),
             LargeButton(
                 label: "Register",
                 onPressed: () => BlocProvider.of<RegisterDonorBloc>(context)
