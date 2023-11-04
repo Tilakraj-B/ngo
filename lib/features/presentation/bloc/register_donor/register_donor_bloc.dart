@@ -1,11 +1,16 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ngo/features/data/model/donor.dart';
+import 'package:ngo/core/resources/data_state.dart';
 import 'package:ngo/features/presentation/bloc/register_donor/register_donor_event.dart';
 import 'package:ngo/features/presentation/bloc/register_donor/register_donor_state.dart';
 
+import '../../../domain/usecase/register_donor.dart';
+
 class RegisterDonorBloc extends Bloc<RegisterDonorEvent, RegisterDonorState> {
-  RegisterDonorBloc() : super(InitialState()) {
+  final RegisterDonorUseCase _registerDonorUseCase;
+
+  RegisterDonorBloc(this._registerDonorUseCase) : super(InitialState()) {
     on<TextChangeEvent>(onTextChange);
+    on<RegisterDonorSubmittedEvent>(onRegisterPresses);
   }
 
   void onTextChange(
@@ -32,12 +37,21 @@ class RegisterDonorBloc extends Bloc<RegisterDonorEvent, RegisterDonorState> {
         state.donorModel = state.donorModel
             .copyWith(donor_anonymous: value == "false" ? false : true);
     }
-    print("Hello chekcing  : ${state.donorModel}");
   }
 
   void onRegisterPresses(
       RegisterDonorSubmittedEvent registerDonorSubmittedEvent,
       Emitter<RegisterDonorState> emit) async {
-    DonorModel donor = state.donorModel;
+    emit(LoadingState());
+    print(state.donorModel);
+
+    final _dataState = await _registerDonorUseCase(parms: state.donorModel);
+    if (_dataState is DataSuccess) {
+      print(
+          "${_dataState.data!.message} the token : ${_dataState.data!.token}");
+    } else {
+      // emit(RegisterErrorState(_dataState.error!));
+      print("${_dataState.error!}");
+    }
   }
 }

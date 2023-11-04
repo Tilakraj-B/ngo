@@ -6,4 +6,4 @@ class TextChangeEvent extends LoginDonorEvent {
   TextChangeEvent(this.value, this.flag);
 }
 
-class RegisterDonorSubmittedEvent extends LoginDonorEvent {}
+class LoginDonorSubmitted extends LoginDonorEvent {}

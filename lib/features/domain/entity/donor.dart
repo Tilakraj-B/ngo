@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:ngo/features/domain/entity/product.dart';
+import 'package:ngo/features/data/model/product.dart';
 
 class DonorEntity extends Equatable {
   final String? donor_name;
@@ -10,7 +10,7 @@ class DonorEntity extends Equatable {
   final String? donor_id_number;
   final String? donor_pan_number;
   final bool? donor_anonymous;
-  final ProductEntity? product;
+  final ProductModel? product;
 
   const DonorEntity(
       {this.donor_name,

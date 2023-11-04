@@ -1,5 +1,10 @@
+import 'package:json_annotation/json_annotation.dart';
+
 import '../../domain/entity/picture.dart';
 
+part 'picture.g.dart';
+
+@JsonSerializable()
 class PictureModel extends PictureEntity {
   PictureModel({
     String? url,
@@ -18,10 +23,8 @@ class PictureModel extends PictureEntity {
   }
 
   // Factory method to create a PictureModel from a JSON Map
-  factory PictureModel.fromJson(Map<String, dynamic> json) {
-    return PictureModel(
-      url: json['url'],
-      filename: json['filename'],
-    );
-  }
+  factory PictureModel.fromJson(Map<String, dynamic> json) =>
+      _$PictureModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PictureModelToJson(this);
 }

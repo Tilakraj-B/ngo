@@ -1,82 +1,32 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:ngo/features/data/model/picture.dart';
 import 'package:ngo/features/domain/entity/product.dart';
 
+part 'product.g.dart';
+
+@JsonSerializable()
 class ProductModel extends ProductEntity {
-  ProductModel({
-    String? productTitle,
-    String? productCategory,
-    List<PictureModel>? productPicturesBefore,
-    List<PictureModel>? productPicturesAfter,
-    String? productDescriptionBefore,
-    String? productDescriptionAfter,
-    String? productDefectsBefore,
-    String? productDefectsAfter,
-    String? productAreaOfDonation,
-    bool? productCollectionStatus,
-    bool? productReimbursementStatus,
-    bool? productRepairStatus,
-    double? productRepairAmount,
-    bool? productReceived,
-    String? productDonor,
-    String? productAgent,
-    String? remark1,
-    String? remark2,
-    String? remark3,
-    String? remark4,
-    String? remark5,
-  }) : super(
-          productTitle: productTitle,
-          productCategory: productCategory,
-          productPicturesBefore: productPicturesBefore,
-          productPicturesAfter: productPicturesAfter,
-          productDescriptionBefore: productDescriptionBefore,
-          productDescriptionAfter: productDescriptionAfter,
-          productDefectsBefore: productDefectsBefore,
-          productDefectsAfter: productDefectsAfter,
-          productAreaOfDonation: productAreaOfDonation,
-          productCollectionStatus: productCollectionStatus,
-          productReimbursementStatus: productReimbursementStatus,
-          productRepairStatus: productRepairStatus,
-          productRepairAmount: productRepairAmount,
-          productReceived: productReceived,
-          productDonor: productDonor,
-          productAgent: productAgent,
-          remark1: remark1,
-          remark2: remark2,
-          remark3: remark3,
-          remark4: remark4,
-          remark5: remark5,
-        );
+  ProductModel(
+      super.product_title,
+      super.product_category,
+      super.product_pictures_before,
+      super.product_pictures_after,
+      super.product_description_before,
+      super.product_description_after,
+      super.product_defects_before,
+      super.product_defects_after,
+      super.product_area_of_donation,
+      super.product_collection_status,
+      super.product_reimbursement_status,
+      super.product_repair_status,
+      super.product_repair_amount,
+      super.product_received,
+      super.product_donor,
+      super.product_agent);
 
   // Factory method to create a ProductModel from a JSON Map
-  factory ProductModel.fromJson(Map<String, dynamic> json) {
-    return ProductModel(
-      productTitle: json['productTitle'],
-      productCategory: json['productCategory'],
-      productPicturesBefore: (json['productPicturesBefore'] as List<dynamic>?)
-          ?.map((e) => PictureModel.fromJson(e))
-          .toList(),
-      productPicturesAfter: (json['productPicturesAfter'] as List<dynamic>?)
-          ?.map((e) => PictureModel.fromJson(e))
-          .toList(),
-      productDescriptionBefore: json['productDescriptionBefore'],
-      productDescriptionAfter: json['productDescriptionAfter'],
-      productDefectsBefore: json['productDefectsBefore'],
-      productDefectsAfter: json['productDefectsAfter'],
-      productAreaOfDonation: json['productAreaOfDonation'],
-      productCollectionStatus: json['productCollectionStatus'],
-      productReimbursementStatus: json['productReimbursementStatus'],
-      productRepairStatus: json['productRepairStatus'],
-      productRepairAmount: json['productRepairAmount'],
-      productReceived: json['productReceived'],
-      productDonor: json['productDonor'],
-      productAgent: json['productAgent'],
-      remark1: json['remark1'],
-      remark2: json['remark2'],
-      remark3: json['remark3'],
-      remark4: json['remark4'],
-      remark5: json['remark5'],
-    );
-  }
+  factory ProductModel.fromJson(Map<String, dynamic> json) =>
+      _$ProductModelFromJson(json);
 
+  Map<String, dynamic> toJson() => _$ProductModelToJson(this);
 }

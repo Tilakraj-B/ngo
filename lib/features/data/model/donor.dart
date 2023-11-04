@@ -1,6 +1,10 @@
+import 'package:json_annotation/json_annotation.dart';
+import 'package:ngo/features/data/model/product.dart';
 import 'package:ngo/features/domain/entity/donor.dart';
-import 'package:ngo/features/domain/entity/product.dart';
 
+part 'donor.g.dart';
+
+@JsonSerializable()
 class DonorModel extends DonorEntity {
   DonorModel({
     super.donor_name,
@@ -14,19 +18,6 @@ class DonorModel extends DonorEntity {
     super.product,
   });
 
-  factory DonorModel.fromJson(Map<String, dynamic> map) {
-    return DonorModel(
-        donor_name: map['donor_name'],
-        donor_mob_number: map['donor_mob_number'],
-        donor_address: map['donor_address'],
-        donor_email: map['donor_email'],
-        donor_id_type: map['donor_id_type'],
-        donor_id_number: map['donor_id_number'],
-        donor_pan_number: map['donor_pan_number'],
-        donor_anonymous: map['donor_anonymous'],
-        product: map['product']);
-  }
-
   DonorModel copyWith(
       {String? donor_name,
       String? donor_mob_number,
@@ -36,7 +27,7 @@ class DonorModel extends DonorEntity {
       String? donor_id_number,
       String? donor_pan_number,
       bool? donor_anonymous,
-      ProductEntity? product}) {
+      ProductModel? product}) {
     return DonorModel(
         donor_name: donor_name ?? this.donor_name,
         donor_mob_number: donor_mob_number ?? this.donor_mob_number,
@@ -48,4 +39,9 @@ class DonorModel extends DonorEntity {
         donor_anonymous: donor_anonymous ?? this.donor_anonymous,
         product: product ?? this.product);
   }
+
+  factory DonorModel.fromJson(Map<String, dynamic> json) =>
+      _$DonorModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DonorModelToJson(this);
 }

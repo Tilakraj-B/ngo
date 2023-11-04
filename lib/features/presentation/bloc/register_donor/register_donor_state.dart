@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:ngo/features/data/model/donor.dart';
 
@@ -12,6 +13,9 @@ abstract class RegisterDonorState extends Equatable {
     donor_address: "",
     donor_anonymous: false,
   );
+  final DioError? error;
+
+  RegisterDonorState({this.error});
 
   @override
   List<Object?> get props => [donorModel];
@@ -19,8 +23,14 @@ abstract class RegisterDonorState extends Equatable {
 
 class InitialState extends RegisterDonorState {}
 
+class LoadingState extends RegisterDonorState {}
+
 class InvalidState extends RegisterDonorState {}
 
 class ValidState extends RegisterDonorState {}
 
-class ErrorState extends RegisterDonorState {}
+class RegisterErrorState extends RegisterDonorState {
+  RegisterErrorState(DioError? error) : super(error: error);
+}
+
+class RegisteredSuccessfullyState extends RegisterDonorState {}

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:ngo/features/data/model/donor.dart';
 
@@ -6,6 +7,9 @@ abstract class LoginDonorState extends Equatable {
     donor_mob_number: "",
     donor_email: "",
   );
+  final DioError? error;
+
+  LoginDonorState({this.error});
 
   @override
   List<Object?> get props => [donorModel];
@@ -13,8 +17,12 @@ abstract class LoginDonorState extends Equatable {
 
 class InitialState extends LoginDonorState {}
 
+class LoadingState extends LoginDonorState {}
+
 class InvalidState extends LoginDonorState {}
 
 class ValidState extends LoginDonorState {}
 
-class ErrorState extends LoginDonorState {}
+class ErrorState extends LoginDonorState {
+  ErrorState(DioError? error) : super(error: error);
+}

@@ -1,13 +1,16 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ngo/features/data/model/donor.dart';
+import 'package:ngo/core/resources/data_state.dart';
+import 'package:ngo/features/domain/usecase/verify_donor.dart';
 import 'package:ngo/features/presentation/bloc/login_donor/login_donor_event.dart';
 import 'package:ngo/features/presentation/bloc/login_donor/login_donor_state.dart';
 
 class LoginDonorBloc extends Bloc<LoginDonorEvent, LoginDonorState> {
-  LoginDonorBloc() : super(InitialState()) {
-    on<TextChangeEvent>(onTextChange);
-  }
+  final VerifyDonorUseCase _verifyDonorUseCase;
 
+  LoginDonorBloc(this._verifyDonorUseCase) : super(InitialState()) {
+    on<TextChangeEvent>(onTextChange);
+    on<LoginDonorSubmitted>(onLoginPresses);
+  }
   void onTextChange(
       TextChangeEvent textChangeEvent, Emitter<LoginDonorState> emit) async {
     String value = textChangeEvent.value ?? "";
@@ -22,9 +25,17 @@ class LoginDonorBloc extends Bloc<LoginDonorEvent, LoginDonorState> {
     print("Hello chekcing  : ${state.donorModel}");
   }
 
-  void onRegisterPresses(
-      RegisterDonorSubmittedEvent registerDonorSubmittedEvent,
+  void onLoginPresses(LoginDonorSubmitted loginDonorSubmitted,
       Emitter<LoginDonorState> emit) async {
-    DonorModel donor = state.donorModel;
+    emit(LoadingState());
+    final dataState = await _verifyDonorUseCase(parms: state.donorModel);
+    if (dataState is DataSuccess) {
+      print("success : ${dataState.data!.message}");
+      emit(InitialState());
+    } else {
+      emit(InitialState());
+
+      print("error : ${dataState.error}");
+    }
   }
 }
