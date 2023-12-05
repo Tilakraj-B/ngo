@@ -19,47 +19,57 @@ class LoginDonor extends StatelessWidget {
   }
 
   _buildBody(BuildContext context) {
-    return BlocBuilder<LoginDonorBloc, LoginDonorState>(
-        builder: (context, state) {
-      if (state is LoadingState) {
-        return const LoadingWidget();
-      }
-      if (state is InitialState) {
-        return SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                InputText(
-                  label: "Donor E-mail",
-                  hintText: "Donor E-mail",
-                  onChanged: (value) => BlocProvider.of<LoginDonorBloc>(context)
-                      .add(TextChangeEvent(value, 1)),
-                ),
-                InputText(
-                  label: "Phone No.",
-                  hintText: "Phone No.",
-                  onChanged: (value) => BlocProvider.of<LoginDonorBloc>(context)
-                      .add(TextChangeEvent(value, 2)),
-                ),
-                LargeButton(
-                    label: "Login",
-                    onPressed: () => BlocProvider.of<LoginDonorBloc>(context)
-                        .add(LoginDonorSubmitted()))
-              ],
+    return BlocListener<LoginDonorBloc, LoginDonorState>(
+      listener: (context, state) {
+        if (state is SuccessState) {
+          Navigator.pop(context);
+          Navigator.pop(context);
+        }
+      },
+      child: BlocBuilder<LoginDonorBloc, LoginDonorState>(
+          builder: (context, state) {
+        if (state is LoadingState) {
+          return const LoadingWidget();
+        }
+        if (state is InitialState) {
+          return SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  InputText(
+                    label: "Donor E-mail",
+                    hintText: "Donor E-mail",
+                    onChanged: (value) =>
+                        BlocProvider.of<LoginDonorBloc>(context)
+                            .add(TextChangeEvent(value, 1)),
+                  ),
+                  InputText(
+                    label: "Phone No.",
+                    hintText: "Phone No.",
+                    onChanged: (value) =>
+                        BlocProvider.of<LoginDonorBloc>(context)
+                            .add(TextChangeEvent(value, 2)),
+                  ),
+                  LargeButton(
+                      label: "Login",
+                      onPressed: () => BlocProvider.of<LoginDonorBloc>(context)
+                          .add(LoginDonorSubmitted())),
+                  LargeButton(
+                      label: "New Donor ?",
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/register_donor');
+                      }),
+                ],
+              ),
             ),
-          ),
-        );
-      }
-      if (state is LoadingState) {
-        return const Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [Text("Loading")],
-        );
-      }
-      return const SizedBox();
-    });
+          );
+        }
+        if (state is ErrorState) {}
+
+        return const SizedBox();
+      }),
+    );
   }
 }

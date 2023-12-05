@@ -51,7 +51,7 @@ class _NGOApiService implements NGOApiService {
   }
 
   @override
-  Future<HttpResponse<AuthResponse>> registerdonor(
+  Future<HttpResponse<AuthResponse>> registerDonor(
       Map<String, dynamic> donorModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -81,7 +81,7 @@ class _NGOApiService implements NGOApiService {
   }
 
   @override
-  Future<HttpResponse<AuthResponse>> verifydonor(
+  Future<HttpResponse<AuthResponse>> loginDonor(
       Map<String, dynamic> donorModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -106,6 +106,36 @@ class _NGOApiService implements NGOApiService {
               baseUrl,
             ))));
     final value = AuthResponse.fromJson(_result.data!);
+    print(_result.data);
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<VerifyResponse>> verifyDonor(String token) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<VerifyResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/donor/view',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = VerifyResponse.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

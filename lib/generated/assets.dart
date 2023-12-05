@@ -41,6 +41,8 @@ class Assets {
       'lib/features/data/remote/auth_response.dart';
   static const String remoteNgoApiService =
       'lib/features/data/remote/ngo_api_service.dart';
+  static const String remoteVerifyResponse =
+      'lib/features/data/remote/verify_response.dart';
   static const String repositoryNgoRepositoryImpl =
       'lib/features/data/repository/ngo_repository_impl.dart';
   static const String repositoryNogRepository =
@@ -48,21 +50,27 @@ class Assets {
   static const String resourcesDataState = 'lib/core/resources/data_state.dart';
   static const String usecaseGetProducts =
       'lib/features/domain/usecase/get_products.dart';
+  static const String usecaseLoginDonor =
+      'lib/features/domain/usecase/login_donor.dart';
   static const String usecaseRegisterDonor =
       'lib/features/domain/usecase/register_donor.dart';
   static const String usecaseVerifyDonor =
       'lib/features/domain/usecase/verify_donor.dart';
   static const String usecasesUsecase = 'lib/core/usecases/usecase.dart';
+  static const String widgetsButtonsImageListView =
+      'lib/features/presentation/widgets/buttons_image_list_view.dart';
+  static const String widgetsCardButtons =
+      'lib/features/presentation/widgets/card_buttons.dart';
   static const String widgetsCheckboxWithText =
       'lib/features/presentation/widgets/checkbox_with_text.dart';
-  static const String widgetsImageListView =
-      'lib/features/presentation/widgets/image_list_view.dart';
   static const String widgetsLargeButton =
       'lib/features/presentation/widgets/large_button.dart';
   static const String widgetsLoadingWidget =
       'lib/features/presentation/widgets/loading_widget.dart';
   static const String widgetsProductCard =
       'lib/features/presentation/widgets/product_card.dart';
+  static const String widgetsScrollSnapListView =
+      'lib/features/presentation/widgets/scroll_snap_list_view.dart';
   static const String widgetsTextField =
       'lib/features/presentation/widgets/text_field.dart';
 }

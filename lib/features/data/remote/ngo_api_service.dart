@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:ngo/core/constants/constants.dart';
 import 'package:ngo/features/data/model/product.dart';
 import 'package:ngo/features/data/remote/auth_response.dart';
+import 'package:ngo/features/data/remote/verify_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'ngo_api_service.g.dart';
@@ -14,10 +15,14 @@ abstract class NGOApiService {
   Future<HttpResponse<List<ProductModel>>> getProducts();
 
   @POST('/donor/register')
-  Future<HttpResponse<AuthResponse>> registerdonor(
+  Future<HttpResponse<AuthResponse>> registerDonor(
       @Body() Map<String, dynamic> donorModel);
 
   @POST('/donor/verify')
-  Future<HttpResponse<AuthResponse>> verifydonor(
+  Future<HttpResponse<AuthResponse>> loginDonor(
       @Body() Map<String, dynamic> donorModel);
+
+  @GET('/donor/view')
+  Future<HttpResponse<VerifyResponse>> verifyDonor(
+      @Header("Authorization") String token);
 }

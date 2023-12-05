@@ -8,7 +8,7 @@ import 'package:ngo/injection_container.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  initalizeDependencies();
+  initializeDependencies();
   runApp(const MyApp());
 }
 
@@ -20,11 +20,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => RegisterDonorBloc(sl())),
-        BlocProvider(create: (context) => LoginDonorBloc(sl())),
-        BlocProvider(create: (context) => HomeBloc(sl()))
+        BlocProvider(create: (context) => sl<RegisterDonorBloc>()),
+        BlocProvider(create: (context) => sl<LoginDonorBloc>()),
+        BlocProvider(create: (context) => sl<HomeBloc>()),
       ],
       child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
         onGenerateRoute: AppRoutes.onGenerateRoutes,
         initialRoute: '/home',
       ),

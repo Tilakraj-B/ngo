@@ -3,11 +3,11 @@ import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import '../../data/model/picture.dart';
 
-class ImageListView extends StatefulWidget {
+class ScrollSnapImageView extends StatefulWidget {
   List<PictureModel>? imageUrl;
   double width;
   double height;
-  ImageListView(
+  ScrollSnapImageView(
       {Key? key,
       required this.imageUrl,
       required this.width,
@@ -15,10 +15,10 @@ class ImageListView extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ImageListViewState createState() => _ImageListViewState();
+  _ScrollSnapImageViewState createState() => _ScrollSnapImageViewState();
 }
 
-class _ImageListViewState extends State<ImageListView> {
+class _ScrollSnapImageViewState extends State<ScrollSnapImageView> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
