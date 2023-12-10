@@ -51,7 +51,7 @@ class RegisterDonorBloc extends Bloc<RegisterDonorEvent, RegisterDonorState> {
           "RegistrationSuccess : ${_dataState.data!.message} the token : ${_dataState.data!.token}");
     } else {
       // emit(RegisterErrorState(_dataState.error!));
-      print("${_dataState.error!}");
+      print("Registration Error : ${_dataState.error!.error}");
     }
   }
 }

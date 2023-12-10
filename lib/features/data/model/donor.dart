@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:ngo/features/data/model/product.dart';
 import 'package:ngo/features/domain/entity/donor.dart';
 
 part 'donor.g.dart';
@@ -15,7 +14,7 @@ class DonorModel extends DonorEntity {
     super.donor_id_number,
     super.donor_pan_number,
     super.donor_anonymous,
-    super.product,
+    super.donor_products,
   });
 
   DonorModel copyWith(
@@ -27,7 +26,7 @@ class DonorModel extends DonorEntity {
       String? donor_id_number,
       String? donor_pan_number,
       bool? donor_anonymous,
-      ProductModel? product}) {
+      List<String>? donor_products}) {
     return DonorModel(
         donor_name: donor_name ?? this.donor_name,
         donor_mob_number: donor_mob_number ?? this.donor_mob_number,
@@ -37,7 +36,7 @@ class DonorModel extends DonorEntity {
         donor_id_number: donor_id_number ?? this.donor_id_number,
         donor_pan_number: donor_pan_number ?? this.donor_pan_number,
         donor_anonymous: donor_anonymous ?? this.donor_anonymous,
-        product: product ?? this.product);
+        donor_products: donor_products ?? this.donor_products);
   }
 
   factory DonorModel.fromJson(Map<String, dynamic> json) =>

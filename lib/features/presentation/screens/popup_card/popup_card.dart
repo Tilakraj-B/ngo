@@ -41,7 +41,9 @@ class PopUpCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       FilledButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/profile');
+                        },
                         child: Text("Profile"),
                       ),
                       FilledButton(

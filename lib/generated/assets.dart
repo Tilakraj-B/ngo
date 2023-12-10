@@ -46,7 +46,7 @@ class Assets {
   static const String repositoryNgoRepositoryImpl =
       'lib/features/data/repository/ngo_repository_impl.dart';
   static const String repositoryNogRepository =
-      'lib/features/domain/repository/nog_repository.dart';
+      'lib/features/domain/repository/ngo_repository.dart';
   static const String resourcesDataState = 'lib/core/resources/data_state.dart';
   static const String usecaseGetProducts =
       'lib/features/domain/usecase/get_products.dart';

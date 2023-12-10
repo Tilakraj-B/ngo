@@ -106,7 +106,6 @@ class _NGOApiService implements NGOApiService {
               baseUrl,
             ))));
     final value = AuthResponse.fromJson(_result.data!);
-    print(_result.data);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

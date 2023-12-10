@@ -6,7 +6,8 @@ part 'auth_response.g.dart';
 class AuthResponse {
   final String? message;
   final String? token;
-  AuthResponse({required this.message, this.token});
+  final String? role;
+  AuthResponse({required this.message, this.token, this.role});
 
   factory AuthResponse.fromJson(Map<String, dynamic> json) =>
       _$AuthResponseFromJson(json);

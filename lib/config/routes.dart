@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ngo/features/presentation/screens/home/home.dart';
 import 'package:ngo/features/presentation/screens/login_donor/login_donor.dart';
 import 'package:ngo/features/presentation/screens/popup_card/popup_card.dart';
+import 'package:ngo/features/presentation/screens/profile/profile.dart';
 import 'package:ngo/features/presentation/screens/register_donor/register_donor.dart';
 
 class AppRoutes {
@@ -19,6 +20,8 @@ class AppRoutes {
           pageBuilder: (_, __, ___) =>
               PopUpCard(State: settings.arguments as String),
         );
+      case '/profile':
+        return _materialRoute(Profile());
 
       default:
         return _materialRoute(Home());

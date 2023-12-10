@@ -34,14 +34,15 @@ class LoginDonorBloc extends Bloc<LoginDonorEvent, LoginDonorState> {
     emit(LoadingState(state.donorModel!));
     print("Donor Model in login : ${state.donorModel}");
     final dataState = await _loginDonorUseCase(parms: state.donorModel);
-    print(dataState.data);
+    print("LoginState : ${dataState.data}");
     if (dataState is DataSuccess) {
       print("successs : ${dataState.data!.message}");
       storage.write(key: 'loginToken', value: "${dataState.data!.token}");
       emit(SuccessState(state.donorModel!));
-    } else {
+    } else if (dataState is DataFailure) {
       emit(InitialState(state.donorModel!));
-      print("error : ${dataState.error}");
+      print("LoginError : ${dataState.error!.error}");
+      print("LoginError : ${dataState.error}");
     }
   }
 }

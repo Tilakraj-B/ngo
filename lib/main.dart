@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ngo/config/routes.dart';
 import 'package:ngo/features/presentation/bloc/home/home_bloc.dart';
 import 'package:ngo/features/presentation/bloc/login_donor/login_donor_bloc.dart';
+import 'package:ngo/features/presentation/bloc/profile/profile_bloc.dart';
 import 'package:ngo/features/presentation/bloc/register_donor/register_donor_bloc.dart';
 import 'package:ngo/injection_container.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => sl<RegisterDonorBloc>()),
         BlocProvider(create: (context) => sl<LoginDonorBloc>()),
         BlocProvider(create: (context) => sl<HomeBloc>()),
+        BlocProvider(create: (context) => sl<ProfileBloc>())
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

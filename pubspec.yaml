@@ -50,7 +50,7 @@ dependencies:
   get_it: ^7.6.0
 
   #dateFormate
-  intl: ^0.18.1
+  intl: ^0.19.0
 
   #Databse
   floor: ^1.4.2

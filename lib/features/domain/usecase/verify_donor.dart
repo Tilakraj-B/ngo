@@ -1,7 +1,7 @@
 import 'package:ngo/core/resources/data_state.dart';
 import 'package:ngo/core/usecases/usecase.dart';
-import 'package:ngo/features/data/remote/verify_response.dart';
-import 'package:ngo/features/domain/repository/nog_repository.dart';
+import 'package:ngo/features/data/remote/responses/verify_response.dart';
+import 'package:ngo/features/domain/repository/ngo_repository.dart';
 
 class VerifyDonorUseCase implements UseCase<DataState<VerifyResponse>, String> {
   final NGORepository _ngoRepository;

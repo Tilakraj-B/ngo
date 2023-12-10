@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:ngo/core/resources/data_state.dart';
@@ -24,7 +26,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     String token = await storage.read(key: 'loginToken') ?? "null";
     bool result = token == "null" ? false : await verifyUser(token!);
 
-    print("product in state :${state.products}");
     if (state.products == null) {
       print("getProducts : Getting Products from database");
       final dataState = await _getProductUseCase();
@@ -47,10 +48,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Future<bool> verifyUser(String token) async {
     final dataState = await _verifyDonorUseCase(parms: token);
     if (dataState is DataSuccess) {
-      print("Verification Successfully : ${dataState.data}");
+      print("Verification Successfully : ${dataState.data!.donor}");
+      String serializedDonor = jsonEncode(dataState.data!.donor);
+      storage.write(key: "donor", value: serializedDonor);
+      print("verifyUser : donor data saved to storage");
+      print("donor data : ${dataState.data!.donor}");
       return true;
     } else {
       print("Verification Error : ${ErrorState(dataState.error!)}");
+      storage.write(key: "loginToken", value: "null");
       return false;
     }
   }

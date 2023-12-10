@@ -4,10 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:ngo/core/resources/data_state.dart';
 import 'package:ngo/features/data/model/donor.dart';
 import 'package:ngo/features/data/model/product.dart';
-import 'package:ngo/features/data/remote/auth_response.dart';
 import 'package:ngo/features/data/remote/ngo_api_service.dart';
-import 'package:ngo/features/data/remote/verify_response.dart';
-import 'package:ngo/features/domain/repository/nog_repository.dart';
+import 'package:ngo/features/data/remote/responses/auth_response.dart';
+import 'package:ngo/features/data/remote/responses/verify_response.dart';
+import 'package:ngo/features/domain/repository/ngo_repository.dart';
 
 class NGORepositoryImpl implements NGORepository {
   final NGOApiService _ngoApiService;
@@ -58,7 +58,7 @@ class NGORepositoryImpl implements NGORepository {
     try {
       print("Donor Model : ${donorModel}");
       final httpResponse = await _ngoApiService.loginDonor(donorModel.toJson());
-      if (httpResponse.response.statusCode == HttpStatus.ok) {
+      if (httpResponse.response.statusCode == HttpStatus.created) {
         print("Login Response : ${httpResponse.data.message}");
         return DataSuccess(httpResponse.data);
       } else {
@@ -93,5 +93,11 @@ class NGORepositoryImpl implements NGORepository {
     } on DioError catch (e) {
       return DataFailure(e);
     }
+  }
+
+  @override
+  Future<DataState<VerifyResponse>> donateProduct(ProductModel productModel) {
+    // TODO: implement donateProduct
+    throw UnimplementedError();
   }
 }

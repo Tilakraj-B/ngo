@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:ngo/core/constants/constants.dart';
 import 'package:ngo/features/data/model/product.dart';
-import 'package:ngo/features/data/remote/auth_response.dart';
-import 'package:ngo/features/data/remote/verify_response.dart';
+import 'package:ngo/features/data/remote/responses/auth_response.dart';
+import 'package:ngo/features/data/remote/responses/verify_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'ngo_api_service.g.dart';

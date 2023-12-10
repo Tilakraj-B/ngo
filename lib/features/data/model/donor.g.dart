@@ -15,9 +15,9 @@ DonorModel _$DonorModelFromJson(Map<String, dynamic> json) => DonorModel(
       donor_id_number: json['donor_id_number'] as String?,
       donor_pan_number: json['donor_pan_number'] as String?,
       donor_anonymous: json['donor_anonymous'] as bool?,
-      product: json['product'] == null
-          ? null
-          : ProductModel.fromJson(json['product'] as Map<String, dynamic>),
+      donor_products: (json['donor_products'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$DonorModelToJson(DonorModel instance) =>
@@ -30,5 +30,5 @@ Map<String, dynamic> _$DonorModelToJson(DonorModel instance) =>
       'donor_id_number': instance.donor_id_number,
       'donor_pan_number': instance.donor_pan_number,
       'donor_anonymous': instance.donor_anonymous,
-      'product': instance.product,
+      'donor_products': instance.donor_products,
     };

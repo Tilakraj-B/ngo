@@ -7,26 +7,29 @@ part of 'product.dart';
 // **************************************************************************
 
 ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
-      json['product_title'] as String?,
-      json['product_category'] as String?,
-      (json['product_pictures_before'] as List<dynamic>?)
+      product_title: json['product_title'] as String?,
+      product_category: json['product_category'] as String?,
+      product_pictures_before:
+          (json['product_pictures_before'] as List<dynamic>?)
+              ?.map((e) => PictureModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
+      product_pictures_after: (json['product_pictures_after'] as List<dynamic>?)
           ?.map((e) => PictureModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      (json['product_pictures_after'] as List<dynamic>?)
-          ?.map((e) => PictureModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      json['product_description_before'] as String?,
-      json['product_description_after'] as String?,
-      json['product_defects_before'] as String?,
-      json['product_defects_after'] as String?,
-      json['product_area_of_donation'] as String?,
-      json['product_collection_status'] as bool?,
-      json['product_reimbursement_status'] as bool?,
-      json['product_repair_status'] as bool?,
-      (json['product_repair_amount'] as num?)?.toDouble(),
-      json['product_received'] as bool?,
-      json['product_donor'] as String?,
-      json['product_agent'] as String?,
+      product_description_before: json['product_description_before'] as String?,
+      product_description_after: json['product_description_after'] as String?,
+      product_defects_before: json['product_defects_before'] as String?,
+      product_defects_after: json['product_defects_after'] as String?,
+      product_area_of_donation: json['product_area_of_donation'] as String?,
+      product_collection_status: json['product_collection_status'] as bool?,
+      product_reimbursement_status:
+          json['product_reimbursement_status'] as bool?,
+      product_repair_status: json['product_repair_status'] as bool?,
+      product_repair_amount:
+          (json['product_repair_amount'] as num?)?.toDouble(),
+      product_received: json['product_received'] as bool?,
+      product_donor: json['product_donor'] as String?,
+      product_agent: json['product_agent'] as String?,
     );
 
 Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
