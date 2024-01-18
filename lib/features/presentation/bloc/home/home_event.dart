@@ -6,11 +6,15 @@ class GetProductsEvent extends HomeEvent {
   const GetProductsEvent();
 }
 
-class DisplayProductEvent extends HomeEvent {
-  final int index;
-  const DisplayProductEvent(this.index);
-}
-
 class LogOutEvent extends HomeEvent {
   const LogOutEvent();
+}
+
+class ToggleProductInformationEvent extends HomeEvent {
+  final int index;
+  ToggleProductInformationEvent(this.index);
+}
+
+class ToggleMenuDialogEvent extends HomeEvent {
+  const ToggleMenuDialogEvent();
 }

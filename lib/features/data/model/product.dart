@@ -7,6 +7,7 @@ part 'product.g.dart';
 @JsonSerializable()
 class ProductModel extends ProductEntity {
   ProductModel({
+    String? id,
     String? product_title,
     String? product_category,
     List<PictureModel>? product_pictures_before,
@@ -24,6 +25,7 @@ class ProductModel extends ProductEntity {
     String? product_donor,
     String? product_agent,
   }) : super(
+          id = id,
           product_title = product_title,
           product_category = product_category,
           product_pictures_before = product_pictures_before,
@@ -42,7 +44,8 @@ class ProductModel extends ProductEntity {
           product_agent = product_agent,
         );
 
-  ProductModel copyWith(
+  ProductModel copyWith({
+    String? id,
     String? product_title,
     String? product_category,
     List<PictureModel>? product_pictures_before,
@@ -59,8 +62,9 @@ class ProductModel extends ProductEntity {
     bool? product_received,
     String? product_donor,
     String? product_agent,
-  ) {
+  }) {
     return ProductModel(
+      id: id ?? this.id,
       product_title: product_title ?? this.product_title,
       product_category: product_category ?? this.product_category,
       product_pictures_before:

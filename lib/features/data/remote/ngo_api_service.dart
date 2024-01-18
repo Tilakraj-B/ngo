@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:ngo/core/constants/constants.dart';
 import 'package:ngo/features/data/model/product.dart';
-import 'package:ngo/features/data/remote/responses/auth_response.dart';
+import 'package:ngo/features/data/remote/responses/response.dart';
 import 'package:ngo/features/data/remote/responses/verify_response.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -15,12 +15,23 @@ abstract class NGOApiService {
   Future<HttpResponse<List<ProductModel>>> getProducts();
 
   @POST('/donor/register')
-  Future<HttpResponse<AuthResponse>> registerDonor(
+  Future<HttpResponse<GeneralResponse>> registerDonor(
       @Body() Map<String, dynamic> donorModel);
 
   @POST('/donor/verify')
-  Future<HttpResponse<AuthResponse>> loginDonor(
+  Future<HttpResponse<GeneralResponse>> loginDonor(
       @Body() Map<String, dynamic> donorModel);
+
+  @POST('/product')
+  @MultiPart()
+  Future<HttpResponse<GeneralResponse>> donateProduct(
+      @Part(name: "product_title") String productTitle,
+      @Part(name: "product_category") String productCategory,
+      @Part(name: "product_description_before") String productDescription,
+      @Part(name: "product_defects_before") String productDefects,
+      @Part(name: "product_area_of_donation") String productArea,
+      @Part(name: "donor_mob_number") String donorMobileNumber,
+      @Part(name: "image") List<MultipartFile>? images);
 
   @GET('/donor/view')
   Future<HttpResponse<VerifyResponse>> verifyDonor(

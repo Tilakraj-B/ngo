@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:ngo/features/data/model/picture.dart';
 
 class ProductEntity extends Equatable {
+  String? id;
   String? product_title;
   String? product_category;
   List<PictureModel>? product_pictures_before;
@@ -20,6 +21,7 @@ class ProductEntity extends Equatable {
   String? product_agent;
 
   ProductEntity(
+      this.id,
       this.product_title,
       this.product_category,
       this.product_pictures_before,
@@ -40,6 +42,7 @@ class ProductEntity extends Equatable {
   @override
   List<Object?> get props {
     return [
+      id,
       product_title,
       product_category,
       product_pictures_before,

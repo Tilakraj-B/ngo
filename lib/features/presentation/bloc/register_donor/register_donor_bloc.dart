@@ -42,6 +42,7 @@ class RegisterDonorBloc extends Bloc<RegisterDonorEvent, RegisterDonorState> {
   void onRegisterPresses(
       RegisterDonorSubmittedEvent registerDonorSubmittedEvent,
       Emitter<RegisterDonorState> emit) async {
+    state.isLoading = true;
     // emit(LoadingState());
     print("OnRegisterPressed : ${state.donorModel}");
 
@@ -53,5 +54,6 @@ class RegisterDonorBloc extends Bloc<RegisterDonorEvent, RegisterDonorState> {
       // emit(RegisterErrorState(_dataState.error!));
       print("Registration Error : ${_dataState.error!.error}");
     }
+    state.isLoading = false;
   }
 }

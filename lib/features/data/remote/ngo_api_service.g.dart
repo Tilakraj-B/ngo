@@ -13,7 +13,7 @@ class _NGOApiService implements NGOApiService {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://ngo-api.onrender.com';
+    baseUrl ??= 'https://ngo-api.azurewebsites.net';
   }
 
   final Dio _dio;
@@ -51,7 +51,7 @@ class _NGOApiService implements NGOApiService {
   }
 
   @override
-  Future<HttpResponse<AuthResponse>> registerDonor(
+  Future<HttpResponse<GeneralResponse>> registerDonor(
       Map<String, dynamic> donorModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -59,7 +59,7 @@ class _NGOApiService implements NGOApiService {
     final _data = <String, dynamic>{};
     _data.addAll(donorModel);
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<AuthResponse>>(Options(
+        _setStreamType<HttpResponse<GeneralResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -75,13 +75,13 @@ class _NGOApiService implements NGOApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = AuthResponse.fromJson(_result.data!);
+    final value = GeneralResponse.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<AuthResponse>> loginDonor(
+  Future<HttpResponse<GeneralResponse>> loginDonor(
       Map<String, dynamic> donorModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -89,7 +89,7 @@ class _NGOApiService implements NGOApiService {
     final _data = <String, dynamic>{};
     _data.addAll(donorModel);
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<AuthResponse>>(Options(
+        _setStreamType<HttpResponse<GeneralResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -105,7 +105,72 @@ class _NGOApiService implements NGOApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = AuthResponse.fromJson(_result.data!);
+    final value = GeneralResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<GeneralResponse>> donateProduct(
+    String productTitle,
+    String productCategory,
+    String productDescription,
+    String productDefects,
+    String productArea,
+    String donorMobileNumber,
+    List<MultipartFile>? images,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'product_title',
+      productTitle,
+    ));
+    _data.fields.add(MapEntry(
+      'product_category',
+      productCategory,
+    ));
+    _data.fields.add(MapEntry(
+      'product_description_before',
+      productDescription,
+    ));
+    _data.fields.add(MapEntry(
+      'product_defects_before',
+      productDefects,
+    ));
+    _data.fields.add(MapEntry(
+      'product_area_of_donation',
+      productArea,
+    ));
+    _data.fields.add(MapEntry(
+      'donor_mob_number',
+      donorMobileNumber,
+    ));
+    if (images != null) {
+      _data.files.addAll(images.map((i) => MapEntry('image', i)));
+    }
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<GeneralResponse>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'multipart/form-data',
+    )
+            .compose(
+              _dio.options,
+              '/product',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = GeneralResponse.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

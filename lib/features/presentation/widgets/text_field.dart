@@ -20,7 +20,7 @@ class InputText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
       child: TextFormField(
         onChanged: onChanged,
         decoration: InputDecoration(
@@ -28,7 +28,12 @@ class InputText extends StatelessWidget {
             suffixIcon: trailingIcon != null ? Icon(trailingIcon) : null,
             label: Text(label),
             hintText: hintText,
-            border: const OutlineInputBorder()),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            fillColor: Colors.white.withOpacity(0.9),
+            filled: true,
+            floatingLabelBehavior: FloatingLabelBehavior.never),
       ),
     );
   }

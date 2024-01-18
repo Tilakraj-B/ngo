@@ -7,3 +7,5 @@ class TextChangeEvent extends LoginDonorEvent {
 }
 
 class LoginDonorSubmitted extends LoginDonorEvent {}
+
+class LoginDonorClose extends LoginDonorEvent {}

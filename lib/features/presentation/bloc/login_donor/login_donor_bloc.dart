@@ -11,10 +11,12 @@ class LoginDonorBloc extends Bloc<LoginDonorEvent, LoginDonorState> {
   final storage = const FlutterSecureStorage();
 
   LoginDonorBloc(this._loginDonorUseCase)
-      : super(InitialState(DonorModel(donor_mob_number: "", donor_email: ""))) {
+      : super(InitialState(
+            DonorModel(donor_mob_number: "", donor_email: ""), false, false)) {
     on<TextChangeEvent>(onTextChange);
     on<LoginDonorSubmitted>(onLoginPresses);
   }
+
   void onTextChange(
       TextChangeEvent textChangeEvent, Emitter<LoginDonorState> emit) async {
     String value = textChangeEvent.value ?? "";
@@ -31,16 +33,14 @@ class LoginDonorBloc extends Bloc<LoginDonorEvent, LoginDonorState> {
 
   void onLoginPresses(LoginDonorSubmitted loginDonorSubmitted,
       Emitter<LoginDonorState> emit) async {
-    emit(LoadingState(state.donorModel!));
-    print("Donor Model in login : ${state.donorModel}");
+    emit(InitialState(state.donorModel!, false, true));
     final dataState = await _loginDonorUseCase(parms: state.donorModel);
-    print("LoginState : ${dataState.data}");
     if (dataState is DataSuccess) {
-      print("successs : ${dataState.data!.message}");
       storage.write(key: 'loginToken', value: "${dataState.data!.token}");
-      emit(SuccessState(state.donorModel!));
+      emit(InitialState(
+          DonorModel(donor_mob_number: "", donor_email: ""), true, false));
     } else if (dataState is DataFailure) {
-      emit(InitialState(state.donorModel!));
+      emit(InitialState(state.donorModel!, false, false));
       print("LoginError : ${dataState.error!.error}");
       print("LoginError : ${dataState.error}");
     }
